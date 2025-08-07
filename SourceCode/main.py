@@ -840,11 +840,12 @@ while run:
                     canjump = False
                     player.y -= Yspeed
                     Yspeed = -jump*minecart_jump_muti
+                    
                 elif Yspeed < 0:
                     player.y += leftright
                     Yspeed = 0
 
-                Yspeed = -jump
+                
                 
     ########################################
     
