@@ -1,8 +1,9 @@
-def menuscreen(hardc, hardc1, dead):
-    import pygame
-    import sys
-    import random
-    import math
+import pygame
+import sys
+import math
+import controls as con
+
+def menuscreen(hardc1, dead):
     pygame.init()
 
     dis = pygame.display.Info()
@@ -16,7 +17,6 @@ def menuscreen(hardc, hardc1, dead):
     run = True
     Yellow = (200, 200, 50)
     red = (255, 0, 0)
-    green = (0, 255, 0)
 
     superstart = False
 
@@ -83,18 +83,10 @@ def menuscreen(hardc, hardc1, dead):
                     toggle = not toggle
                 if box1.collidepoint(virtual_mx, virtual_my):
                     superstart = True
-
-
-
                     run = False
                 if box3.collidepoint(virtual_mx, virtual_my):
-
-
-
-
                     run = False
                 if box4.collidepoint(virtual_mx, virtual_my):
-                    import controls as con
                     con.controlss()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] or keys[pygame.K_ESCAPE]:
@@ -185,12 +177,9 @@ def menuscreen(hardc, hardc1, dead):
         scalesurface = pygame.transform.smoothscale(scrSC, (var1, var2))
         screen.blit(scalesurface, (0,0))
         pygame.display.update()
+        
     if not dead and hardc1:
         toggle = True
-
-
-
-
 
 
     if superstart and toggle and (dead or hardc1 == False):
