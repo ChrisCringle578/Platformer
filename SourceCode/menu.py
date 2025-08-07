@@ -33,34 +33,34 @@ def menuscreen(hardc, hardc1, dead):
 
 
 
-    bg = pygame.image.load(r"textures\menubackground.png")
+    bg = pygame.image.load(r"textures/menubackground.png")
     background = pygame.transform.scale(bg, (scw, sch))
 
 
 
-    start = pygame.image.load(r"textures\start.png")
+    start = pygame.image.load(r"textures/start.png")
     start = pygame.transform.scale(start, (sizew, sizeh))
-    start2 = pygame.image.load(r"textures\start2.png")
+    start2 = pygame.image.load(r"textures/start2.png")
     start2 = pygame.transform.scale(start2, (sizew, sizeh))
 
-    hardon1 = pygame.image.load(r"textures\hardon.png")
+    hardon1 = pygame.image.load(r"textures/hardon.png")
     hardon1 = pygame.transform.scale(hardon1, (sizew, sizeh))
-    hardon2 = pygame.image.load(r"textures\hardon2.png")
+    hardon2 = pygame.image.load(r"textures/hardon2.png")
     hardon2 = pygame.transform.scale(hardon2, (sizew, sizeh))
-    hardoff1 = pygame.image.load(r"textures\hardoff.png")
+    hardoff1 = pygame.image.load(r"textures/hardoff.png")
     hardoff1 = pygame.transform.scale(hardoff1, (sizew, sizeh))
-    hardoff2 = pygame.image.load(r"textures\hardoff2.png")
+    hardoff2 = pygame.image.load(r"textures/hardoff2.png")
     hardoff2 = pygame.transform.scale(hardoff2, (sizew, sizeh))
 
-    Q1 = pygame.image.load(r"textures\Q1.png")
+    Q1 = pygame.image.load(r"textures/Q1.png")
     Q1 = pygame.transform.scale(Q1, (sizew//2 - 20, sizeh))
-    Q2 = pygame.image.load(r"textures\Q2.png")
+    Q2 = pygame.image.load(r"textures/Q2.png")
     Q2 = pygame.transform.scale(Q2, (sizew//2 - 20, sizeh))
 
 
-    Q12 = pygame.image.load(r"textures\Con1.png")
+    Q12 = pygame.image.load(r"textures/Con1.png")
     Q12 = pygame.transform.scale(Q12, (sizew//2 - 20, sizeh))
-    Q22 = pygame.image.load(r"textures\Con2.png")
+    Q22 = pygame.image.load(r"textures/Con2.png")
     Q22 = pygame.transform.scale(Q22, (sizew//2 - 20, sizeh))
 
 
@@ -149,7 +149,7 @@ def menuscreen(hardc, hardc1, dead):
 
 
 
-        font = pygame.font.Font(r"textures\Minecraft.ttf", 40)
+        font = pygame.font.Font(r"textures/Minecraft.ttf", 40)
         text_surface = font.render("ONLY in 1080p :)", True, Yellow)
 
 
