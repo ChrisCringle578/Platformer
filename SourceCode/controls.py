@@ -29,13 +29,13 @@ def controlss():
 
 
 
-    bg = pygame.image.load(r"textures\menubackground.png")
+    bg = pygame.image.load(r"textures/menubackground.png")
     background = pygame.transform.scale(bg, (scw, sch))
 
 
-    Q12 = pygame.image.load(r"textures\back1.png")
+    Q12 = pygame.image.load(r"textures/back1.png")
     Q12 = pygame.transform.scale(Q12, (sizew//2 - 20, sizeh))
-    Q22 = pygame.image.load(r"textures\back2.png")
+    Q22 = pygame.image.load(r"textures/back2.png")
     Q22 = pygame.transform.scale(Q22, (sizew//2 - 20, sizeh))
 
     Yellow = (200, 200, 50)
@@ -62,7 +62,7 @@ def controlss():
             pygame.quit()
             sys.exit()
         scrSC.blit(background, (0, 0))
-        font = pygame.font.Font(r"textures\Minecraft.ttf", 35)
+        font = pygame.font.Font(r"textures/Minecraft.ttf", 35)
 
 
         text_surface = font.render("-Dont hit the magma blocks", True, color)
