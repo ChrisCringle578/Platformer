@@ -1,5 +1,6 @@
 import pygame
 import sys
+import menu as mf
 pygame.init()
 dis = pygame.display.Info()
 var1, var2 = dis.current_w, dis.current_h
@@ -520,6 +521,7 @@ boxes = []
 minecart = []
 lava = []
 win = []
+
 #convert to boxes
 def convert_to_list(level_num):
     boxes.clear()
@@ -528,26 +530,17 @@ def convert_to_list(level_num):
     minecart.clear()
     level = level_num
     for a in range(576):
+        rowNumber1 = (a//rownum)
+        relX = (a-(rowNumber1*rownum))*size
+        relY = rowNumber1*size
         if level[a] == 1:
-            rowNumber1 = (a//rownum)
-            relX = (a-(rowNumber1*rownum))*size
-            relY = rowNumber1*size
             boxes.append(pygame.Rect(relX,relY,sizeX,size))
             # plat = pygame.draw.rect(screen,"black",(relX,relY,sizeX,size))
         elif level[a] == 4:#goal
-            rowNumber1 = (a//rownum)
-            relX = (a-(rowNumber1*rownum))*size
-            relY = rowNumber1*size
             win.append(pygame.Rect(relX,relY,sizeX,size))
         elif level[a]==2:#spikes
-            rowNumber1 = (a//rownum)
-            relX = (a-(rowNumber1*rownum))*size
-            relY = rowNumber1*size
             lava.append(pygame.Rect(relX,relY,sizeX,size))
         elif level[a]==5:#minecart
-            rowNumber1 = (a//rownum)
-            relX = (a-(rowNumber1*rownum))*size
-            relY = rowNumber1*size
             minecart.append(pygame.Rect(relX,relY+(size//2-3*ratio),sizeX,size))
 
 convert_to_list(level[current_level])
@@ -595,8 +588,7 @@ scrSC = pygame.Surface((1920, 1080))
 pygame.display.set_caption("Platformer")
 player = pygame.Rect(PlayerX, PlayerY, sizeX, size)
 
-import menu as mf
-run, hardcore, restart = mf.menuscreen(hardcoreenabler, hardcore, dead)
+run, hardcore, restart = mf.menuscreen(hardcore, dead)
 hardcoreenabler = False
 dead = False
 
@@ -628,8 +620,8 @@ while run:
 
 
             if event.key == pygame.K_m:
-                import menu as mf
-                run, hardcore, restart = mf.menuscreen(hardcoreenabler, hardcore, dead)
+                
+                run, hardcore, restart = mf.menuscreen(hardcore, dead)
                 hardcoreenabler = False
                 dead = False
                 if restart:
@@ -770,54 +762,7 @@ while run:
             elif Xspeed < 0:  # Moving left, collided with right side of box
                 player.x = box.x + box.width
                 Xspeed = 0
-    for lava1 in lava:
-        # pygame.draw.rect(screen, "red", lava1)
-        scrSC.blit(lava_image, lava1)
-        if player.colliderect(lava1):
-            if not has_minecart:
-                if hardcore:
-                    #reset code
-                    last_mc_grab = -600
-                    current_level = 0
-                    convert_to_list(level[current_level])
-                    pos = spawn_pos(level[current_level])
-                    PlayerY = pos[1]
-                    PlayerX = pos[0]
-                    try:
-                        OGY = pos[1]
-                        OGX = pos[0]
-                    except:
-                        print("you forgot the dang spawn dumbass")
-                        input()
-                    player.x = OGX
-                    player.y = OGY
-                    run = False
-                    hardcoreenabler = True
-                    dead = True
-                    import menu as mf
-                    run, hardcore, restart = mf.menuscreen(hardcoreenabler, hardcore, dead)
-                    hardcoreenabler = False
-                    dead = False
-                else:
-                    #resetting minecart
-                    reset_minecart(current_level)
-                    has_minecart = False
-                    last_mc_grab = -600
-                    Yspeed=0
-                    player.x = OGX
-                    player.y = OGY
-                    death = False
-            else:#you do have a minecart
-                if Xspeed > 0:
-                    player.x -= Xspeed
-                    Xspeed = -leftright*1.3
-                    canjump = True
-                    last_mc_grab = fps_count-(600)
-                elif Xspeed <= 0:
-                    player.x -= Xspeed
-                    Xspeed = leftright*1.3
-                    canjump = True
-                    last_mc_grab = fps_count-(600)
+
 ###########################
 
 
@@ -835,60 +780,11 @@ while run:
             elif Yspeed < 0:  # Moving up, hit bottom of box
                 player.y = box.y + box.height
                 Yspeed = 0
+            
     if finish:
         break
     #################
 
-
-
-
-
-    ###################
-    for lava1 in lava:
-        # pygame.draw.rect(screen, "red", lava1)
-        scrSC.blit(lava_image, lava1)
-        if player.colliderect(lava1):
-            if not has_minecart:
-                if hardcore:
-                    last_mc_grab = -600
-                    current_level = 0
-                    convert_to_list(level[current_level])
-                    pos = spawn_pos(level[current_level])
-                    PlayerY = pos[1]
-                    PlayerX = pos[0]
-                    try:
-                        OGY = pos[1]
-                        OGX = pos[0]
-                    except:
-                        print("you forgot the dang spawn dumbass")
-                        input()
-                    player.x = OGX
-                    player.y = OGY
-                    run = False
-                    hardcoreenabler = True
-                    dead = True
-                    import menu as mf
-                    run, hardcore, restart = mf.menuscreen(hardcoreenabler, hardcore, dead)
-                    hardcoreenabler = False
-                    dead = False
-                else:
-                    reset_minecart(current_level)
-                    has_minecart = False
-                    last_mc_grab = -600
-                    Yspeed=0
-                    player.x = OGX
-                    player.y = OGY
-                    death = False
-            else:#you do have a minecart
-                if Yspeed > 0:
-                    player.y -= Yspeed
-                    Yspeed = -jump*minecart_jump_muti
-                    canjump = True
-                    last_mc_grab = -600
-                elif Yspeed < 0:
-                    player.y += leftright
-                    Yspeed = 0
-                    last_mc_grab = -600
 
     ############################## start rendering shit
     scrSC.blit(background, (0, 0))
@@ -915,6 +811,12 @@ while run:
                         input()
                     player.x = OGX
                     player.y = OGY
+                    run = False
+                    hardcoreenabler = True
+                    dead = True
+                    run, hardcore, restart = mf.menuscreen(hardcore, dead)
+                    hardcoreenabler = False
+                    dead = False
                 else:
                     reset_minecart(current_level)
                     has_minecart = False
@@ -925,9 +827,26 @@ while run:
                     death = False
             else:#you do have a minecart
                 player.y -= leftright
-                Yspeed = -jump
                 canjump = True
+                player.x -= Xspeed
+
+                if Xspeed > 0:
+                    Xspeed = -leftright*1.3
+                elif Xspeed <= 0:
+                    Xspeed = leftright*1.3
+                
                 last_mc_grab = -600
+                if Yspeed > 0:
+                    canjump = False
+                    player.y -= Yspeed
+                    Yspeed = -jump*minecart_jump_muti
+                    
+                elif Yspeed < 0:
+                    player.y += leftright
+                    Yspeed = 0
+
+                
+                
     ########################################
     
 
